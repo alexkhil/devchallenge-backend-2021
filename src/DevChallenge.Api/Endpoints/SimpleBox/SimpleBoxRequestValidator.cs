@@ -1,22 +1,10 @@
 ﻿using FluentValidation;
-using System.Text.Json.Serialization;
 
-namespace DevChallenge.Api;
+namespace DevChallenge.Api.Endpoints.SimpleBox;
 
-public record SimpleBoxRequest(SheetSize SheetSize, BoxSize BoxSize);
-
-public record BoxSize(
-    [property: JsonPropertyName("w")] int Width,
-    [property: JsonPropertyName("d")] int Depth,
-    [property: JsonPropertyName("h")] int Height);
-
-public record SheetSize(
-    [property: JsonPropertyName("w")] int Width,
-    [property: JsonPropertyName("l")] int Length);
-
-public class SimpleBoxRequestValidtor : AbstractValidator<SimpleBoxRequest>
+public class SimpleBoxRequestValidator : AbstractValidator<SimpleBoxRequest>
 {
-    public SimpleBoxRequestValidtor()
+    public SimpleBoxRequestValidator()
     {
         RuleFor(x => x.BoxSize).NotNull().SetValidator(new BoxSizeValidator());
         RuleFor(x => x.SheetSize).NotNull().SetValidator(new SheetSizeValidator());

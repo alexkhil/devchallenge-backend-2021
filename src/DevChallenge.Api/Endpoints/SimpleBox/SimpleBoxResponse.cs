@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DevChallenge.Api;
+namespace DevChallenge.Api.Endpoints.SimpleBox;
 
-abstract record Response(bool Success);
+abstract record SimpleBoxResponse(bool Success);
 
-record FailResponse(string Error) : Response(false);
+record FailResponse(string Error) : SimpleBoxResponse(false);
 
-record SuccessResponse(int Amount, IReadOnlyList<Command> Programm) : Response(true);
+record SuccessResponse(int Amount, IReadOnlyList<Command> Programm) : SimpleBoxResponse(true);
 
 abstract record Command([property: JsonPropertyName("command")] CommandType Type);
 
