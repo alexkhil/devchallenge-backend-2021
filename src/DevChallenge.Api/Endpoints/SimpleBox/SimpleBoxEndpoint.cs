@@ -20,7 +20,7 @@ public class SimpleBoxEndpoint : IEndpointDefinition
 
     public void DefineServices(IServiceCollection services)
     {
-        services.AddSingleton<IBoxPacker, RowBoxPacker>();
+        services.AddSingleton<ICutter, SimpleCutter>();
     }
 
     internal static async Task<IResult> PostSimpleBoxRequest(

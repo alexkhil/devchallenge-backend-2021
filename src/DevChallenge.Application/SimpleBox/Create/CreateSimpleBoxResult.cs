@@ -1,5 +1,5 @@
-﻿namespace DevChallenge.Application.SimpleBox.Create;
+﻿using DevChallenge.Domain;
 
-public record CreateSimpleBoxResult
-{
-}
+namespace DevChallenge.Application.SimpleBox.Create;
+
+public record CreateSimpleBoxResult(int Amount, IReadOnlyList<Command> Commands);

@@ -37,14 +37,14 @@ public class SimpleBoxTests
 
     [Theory]
     [ClassData(typeof(SimpleBoxRequestWithBoxesData))]
-    public async Task Endpoint_called_with_valid_request_respond_with_status_code_200_and_boxes(SimpleBoxRequest request, int boxes)
+    public async Task Endpoint_called_with_valid_request_respond_with_status_code_200_and_boxes(SimpleBoxRequest request, SuccessResponse expected)
     {
         var response = await PostAsync(request);
         var actual = await response.Content.ReadFromJsonAsync<SuccessResponse>();
 
         using var scope = new AssertionScope();
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        actual.Should().BeEquivalentTo(new SuccessResponse(boxes, new List<Command>()));
+        actual.Should().BeEquivalentTo(expected);
     }
 
     private static async Task<HttpResponseMessage> PostAsync(SimpleBoxRequest request)

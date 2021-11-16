@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CSharpFunctionalExtensions;
 using DevChallenge.Application.SimpleBox.Create;
+using DevChallenge.Domain;
 
 namespace DevChallenge.Api.Endpoints.SimpleBox;
 
@@ -12,7 +13,32 @@ public class SimpleBoxMappingProfile : Profile
         CreateMap<BoxSize, Application.SimpleBox.Create.BoxSize>(MemberList.Destination);
         CreateMap<SimpleBoxRequest, CreateSimpleBoxCommand>(MemberList.Destination);
 
+        CreateMap<StartCommand, Dictionary<string, object>>(MemberList.Destination)
+            .ConstructUsing(src => new Dictionary<string, object> { { "command", "START" } });
+
+        CreateMap<StopCommand, Dictionary<string, object>>(MemberList.Destination)
+            .ConstructUsing(src => new Dictionary<string, object> { { "command", "STOP" } });
+
+        CreateMap<DownCommand, Dictionary<string, object>>(MemberList.Destination)
+            .ConstructUsing(src => new Dictionary<string, object> { { "command", "DOWN" } });
+
+        CreateMap<UpCommand, Dictionary<string, object>>(MemberList.Destination)
+            .ConstructUsing(src => new Dictionary<string, object> { { "command", "UP" } });
+
+        CreateMap<GotoCommand, Dictionary<string, object>>(MemberList.Destination)
+            .ConstructUsing(src => new Dictionary<string, object>
+            {
+                { "command", "GOTO" },
+                { "x", src.X },
+                { "y", src.Y }
+            });
+
         CreateMap<Result<CreateSimpleBoxResult>, SimpleBoxResponse>()
-            .ConstructUsing((r) => r.IsFailure ? new FailResponse(r.Error) : new SuccessResponse(1, new List<Command>()));
+            .ConstructUsing((src, ctx) =>
+            {
+                return src.IsSuccess
+                    ? new SuccessResponse(src.Value.Amount, src.Value.Commands.Select(c => ctx.Mapper.Map<Dictionary<string, object>>(c)).ToList())
+                    : new FailResponse(src.Error);
+            });
     }
 }
