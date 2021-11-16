@@ -23,14 +23,13 @@ public class SimpleCutter : ICutter
         return (Math.Max(horizontalBoxes, verticalBoxes), commands);
     }
 
-    // TODO: fix vertical cutter
     private static (List<Command> commands, int boxesCount) CutBoxVertically(Sheet sheet, Box template)
     {
         var commands = new List<Command>();
         var boxesCount = 0;
-        for (var y = 0; template.TemplateWidth <= sheet.Height - y; y += template.TemplateHeight)
+        for (var y = 0; template.TemplateWidth <= sheet.Height - y; y += template.TemplateWidth)
         {
-            for (var x = 0; template.TemplateHeight <= sheet.Width - x; x += template.TemplateWidth)
+            for (var x = 0; template.TemplateHeight <= sheet.Width - x; x += template.TemplateHeight)
             {
                 commands.AddRange(template.CutVerticaly(x, y));
                 boxesCount++;
