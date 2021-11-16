@@ -9,12 +9,8 @@ public class SimpleBoxRequestWithBoxesData : TheoryData<SimpleBoxRequest, Succes
     {
         Add(new SimpleBoxRequest(new SheetSize(4, 3), new BoxSize(1, 1, 1)), new SuccessResponse(1, new List<Dictionary<string, object>>
         {
-
+            new Dictionary<string, object> { { "command", "START" } },
+            new Dictionary<string, object> { { "command", "STOP" } },
         }));
-        //Add(new SimpleBoxRequest(new SheetSize(3, 4), new BoxSize(1, 1, 1)), 1);
-        //Add(new SimpleBoxRequest(new SheetSize(8, 3), new BoxSize(1, 1, 1)), 2);
-        //Add(new SimpleBoxRequest(new SheetSize(3, 8), new BoxSize(1, 1, 1)), 2);
-        //Add(new SimpleBoxRequest(new SheetSize(4, 6), new BoxSize(1, 1, 1)), 2);
-        //Add(new SimpleBoxRequest(new SheetSize(6, 4), new BoxSize(1, 1, 1)), 2);
     }
 }

@@ -20,10 +20,10 @@ public class SimpleCutterTests
 
     public static TheoryData<Sheet, Box, int> TestData => new()
     {
-        //{ Sheet.Create(4, 3).Value, Box.Create(1, 1, 1).Value, 1 },
-        //{ Sheet.Create(3, 4).Value, Box.Create(1, 1, 1).Value, 1 },
-        //{ Sheet.Create(8, 3).Value, Box.Create(1, 1, 1).Value, 2 },
-        //{ Sheet.Create(8, 6).Value, Box.Create(1, 1, 1).Value, 4 },
+        { Sheet.Create(4, 3).Value, Box.Create(1, 1, 1).Value, 1 },
+        { Sheet.Create(3, 4).Value, Box.Create(1, 1, 1).Value, 1 },
+        { Sheet.Create(8, 3).Value, Box.Create(1, 1, 1).Value, 2 },
+        { Sheet.Create(8, 6).Value, Box.Create(1, 1, 1).Value, 4 },
         { Sheet.Create(6, 8).Value, Box.Create(1, 1, 1).Value, 4 },
     };
 }
