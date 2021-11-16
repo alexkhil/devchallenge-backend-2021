@@ -5,6 +5,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using Xunit;
 
 namespace DevChallenge.Api.Tests;
@@ -40,11 +41,11 @@ public class SimpleBoxTests
     public async Task Endpoint_called_with_valid_request_respond_with_status_code_200_and_boxes(SimpleBoxRequest request, SuccessResponse expected)
     {
         var response = await PostAsync(request);
-        var actual = await response.Content.ReadFromJsonAsync<SuccessResponse>();
+        var actual = await response.Content.ReadAsStringAsync();
 
         using var scope = new AssertionScope();
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        actual.Should().BeEquivalentTo(expected);
+        actual.Should().BeEquivalentTo(JsonSerializer.Serialize(expected));
     }
 
     private static async Task<HttpResponseMessage> PostAsync(SimpleBoxRequest request)

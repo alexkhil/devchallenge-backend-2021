@@ -1,6 +1,6 @@
 ﻿using DevChallenge.Domain.Tests.TestData;
-using FluentAssertions.Execution;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Xunit;
 
 namespace DevChallenge.Domain.Tests;
@@ -51,70 +51,5 @@ public class BoxTests
         result.Value.Width.Value.Should().Be(width);
         result.Value.Height.Value.Should().Be(height);
         result.Value.Depth.Value.Should().Be(depth);
-    }
-
-    [Theory]
-    [InlineData(1, 1, 1)]
-    public void CutHorizontaly_returns_commands_to_cut(int width, int height, int depth)
-    {
-        var box = Box.Create(width, height, depth).Value;
-
-        var actual = box.CutHorizontaly(0, 0);
-
-        var expected = new List<Command>
-        {
-            new GotoCommand(1, 0),
-            new DownCommand(),
-            new GotoCommand(1, 1),
-            new GotoCommand(0, 1),
-            new GotoCommand(0, 2),
-            new GotoCommand(1, 2),
-            new GotoCommand(1, 3),
-            new GotoCommand(2, 3),
-            new GotoCommand(2, 2),
-            new GotoCommand(4, 2),
-            new GotoCommand(4, 1),
-            new GotoCommand(2, 1),
-            new GotoCommand(2, 0),
-            new GotoCommand(1, 0),
-            new UpCommand()
-        };
-        ShouldBeEquivalent(expected, actual);
-    }
-
-    [Theory]
-    [InlineData(1, 1, 1)]
-    public void CutVerticaly_returns_commands_to_cut(int width, int height, int depth)
-    {
-        var box = Box.Create(width, height, depth).Value;
-
-        var actual = box.CutVerticaly(0, 0);
-
-        var expected = new List<Command>
-            {
-                new GotoCommand(1, 0),
-                new DownCommand(),
-                new GotoCommand(1, 1),
-                new GotoCommand(0, 1),
-                new GotoCommand(0, 2),
-                new GotoCommand(1, 2),
-                new GotoCommand(1, 4),
-                new GotoCommand(2, 4),
-                new GotoCommand(2, 2),
-                new GotoCommand(3, 2),
-                new GotoCommand(3, 1),
-                new GotoCommand(2, 1),
-                new GotoCommand(2, 0),
-                new GotoCommand(1, 0),
-                new UpCommand()
-            };
-        ShouldBeEquivalent(expected, actual);
-    }
-
-    private static void ShouldBeEquivalent(IEnumerable<Command> expected, IEnumerable<Command> actual)
-    {
-        var stringActual = actual.Select(x => x.ToString()).ToList();
-        var stringExpected = expected.Select(x => x.ToString()).ToList();
-        stringActual.Should().BeEquivalentTo(stringExpected);
     }
 }

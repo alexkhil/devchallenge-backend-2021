@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CSharpFunctionalExtensions;
+using DevChallenge.Application.Integration.Cutter.Abstractions;
 using DevChallenge.Application.SimpleBox.Create;
-using DevChallenge.Domain;
 
 namespace DevChallenge.Api.Endpoints.SimpleBox;
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using DevChallenge.Application.Integration.Cutter;
+using DevChallenge.Application.Integration.Cutter.Abstractions;
 using DevChallenge.Application.SimpleBox.Create;
-using DevChallenge.Domain;
 using MediatR;
 using System.Net.Mime;
-
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
 namespace DevChallenge.Api.Endpoints.SimpleBox;
@@ -20,10 +20,17 @@ public class SimpleBoxEndpoint : IEndpointDefinition
 
     public void DefineServices(IServiceCollection services)
     {
-        services.AddSingleton<ICutter, SimpleCutter>();
+        services.AddSingleton<VerticalCutter>();
+        services.AddSingleton<HorizontalCutter>();
+        services.AddSingleton<ICutter>(s => new BestCutter(
+                new ICutter[]
+                {
+                    s.GetRequiredService<VerticalCutter>(),
+                    s.GetRequiredService<HorizontalCutter>()
+                }));
     }
 
-    internal static async Task<IResult> PostSimpleBoxRequest(
+    static async Task<IResult> PostSimpleBoxRequest(
         IMapper mapper,
         ISender sender,
         SimpleBoxRequest request,

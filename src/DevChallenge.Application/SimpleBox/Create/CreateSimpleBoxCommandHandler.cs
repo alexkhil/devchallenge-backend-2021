@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using DevChallenge.Application.Integration.Cutter.Abstractions;
 using DevChallenge.Domain;
 using MediatR;
 
@@ -6,11 +7,11 @@ namespace DevChallenge.Application.SimpleBox.Create;
 
 public class CreateSimpleBoxCommandHandler : RequestHandler<CreateSimpleBoxCommand, Result<CreateSimpleBoxResult>>
 {
-    private readonly ICutter boxPacker;
+    private readonly ICutter _cutter;
 
-    public CreateSimpleBoxCommandHandler(ICutter boxPacker)
+    public CreateSimpleBoxCommandHandler(ICutter cutter)
     {
-        this.boxPacker = boxPacker;
+        _cutter = cutter;
     }
 
     protected override Result<CreateSimpleBoxResult> Handle(CreateSimpleBoxCommand request)
@@ -20,7 +21,7 @@ public class CreateSimpleBoxCommandHandler : RequestHandler<CreateSimpleBoxComma
 
         return Result.FirstFailureOrSuccess(box, sheet)
             .Bind(() => sheet.Value.CanPlace(box.Value))
-            .Map(x => boxPacker.Cut(x, box.Value))
+            .Map(x => _cutter.Cut(x, box.Value))
             .Map(x => new CreateSimpleBoxResult(x.Amount, x.Commands));
     }
 }

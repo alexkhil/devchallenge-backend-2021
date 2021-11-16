@@ -1,4 +1,4 @@
-﻿using DevChallenge.Domain;
+﻿using DevChallenge.Application.Integration.Cutter.Abstractions;
 
 namespace DevChallenge.Application.SimpleBox.Create;
 
