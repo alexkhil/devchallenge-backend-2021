@@ -39,7 +39,7 @@ Solution consider box as a solid rectangle without possibility to overlap.
 There are two options how we can place rectangle: horizontally and vertically.
 According to the sheet size might be situations were either one of two options has better coverage.
 Example:
-![example-1](https://i.ibb.co/Ct7QD0M/image.png)
+![example-1](https://raw.githubusercontent.com/alexkhil/devchallenge-backend-2021/main/.assets/example.png?token=AHDLFBVWU2WRSOSNTBMTKXLBVNMTU)
 Both of these strategies are implemented, so we pick results from strategy with better coverage.
 
 ## TODO
