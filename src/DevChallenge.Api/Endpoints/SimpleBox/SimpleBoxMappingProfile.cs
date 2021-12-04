@@ -13,19 +13,19 @@ public class SimpleBoxMappingProfile : Profile
         CreateMap<BoxSize, Application.SimpleBox.Create.BoxSize>(MemberList.Destination);
         CreateMap<SimpleBoxRequest, CreateSimpleBoxCommand>(MemberList.Destination);
 
-        CreateMap<StartCommand, Dictionary<string, object>>(MemberList.Destination)
+        CreateMap<StartCommand, Dictionary<string, object>>(MemberList.None)
             .ConstructUsing(src => new Dictionary<string, object> { { "command", "START" } });
 
-        CreateMap<StopCommand, Dictionary<string, object>>(MemberList.Destination)
+        CreateMap<StopCommand, Dictionary<string, object>>(MemberList.None)
             .ConstructUsing(src => new Dictionary<string, object> { { "command", "STOP" } });
 
-        CreateMap<DownCommand, Dictionary<string, object>>(MemberList.Destination)
+        CreateMap<DownCommand, Dictionary<string, object>>(MemberList.None)
             .ConstructUsing(src => new Dictionary<string, object> { { "command", "DOWN" } });
 
-        CreateMap<UpCommand, Dictionary<string, object>>(MemberList.Destination)
+        CreateMap<UpCommand, Dictionary<string, object>>(MemberList.None)
             .ConstructUsing(src => new Dictionary<string, object> { { "command", "UP" } });
 
-        CreateMap<GotoCommand, Dictionary<string, object>>(MemberList.Destination)
+        CreateMap<GotoCommand, Dictionary<string, object>>(MemberList.None)
             .ConstructUsing(src => new Dictionary<string, object>
             {
                 { "command", "GOTO" },
@@ -33,7 +33,7 @@ public class SimpleBoxMappingProfile : Profile
                 { "y", src.Y }
             });
 
-        CreateMap<Result<CreateSimpleBoxResult>, SimpleBoxResponse>()
+        CreateMap<Result<CreateSimpleBoxResult>, SimpleBoxResponse>(MemberList.None)
             .ConstructUsing((src, ctx) =>
             {
                 return src.IsSuccess

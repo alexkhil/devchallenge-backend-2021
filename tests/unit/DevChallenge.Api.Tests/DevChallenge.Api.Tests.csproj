@@ -9,7 +9,6 @@
         <PackageReference Include="FluentAssertions" Version="6.2.0" />
         <PackageReference Include="FluentAssertions.Analyzers" Version="0.12.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-        <PackageReference Include="Moq" Version="4.16.1" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,8 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\DevChallenge.Application\DevChallenge.Application.csproj" />
-      <ProjectReference Include="..\..\..\src\DevChallenge.Domain\DevChallenge.Domain.csproj" />
+      <ProjectReference Include="..\..\..\src\DevChallenge.Api\DevChallenge.Api.csproj" />
     </ItemGroup>
 
 </Project>
