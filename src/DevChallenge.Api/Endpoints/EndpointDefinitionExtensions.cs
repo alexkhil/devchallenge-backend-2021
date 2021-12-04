@@ -3,7 +3,7 @@
 internal static class EndpointDefinitionExtensions
 {
     public static void AddEndpointDefinitions(
-    this IServiceCollection services, params Type[] scanMarkers)
+        this IServiceCollection services, params Type[] scanMarkers)
     {
         var endpointDefinitions = new List<IEndpointDefinition>();
 

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using DevChallenge.Application.Integration.Cutter;
-using DevChallenge.Application.Integration.Cutter.Abstractions;
+using DevChallenge.Application.Integration.Cutter.DependencyInjection;
 using DevChallenge.Application.SimpleBox.Create;
 using MediatR;
 using System.Net.Mime;
@@ -20,14 +19,7 @@ public class SimpleBoxEndpoint : IEndpointDefinition
 
     public void DefineServices(IServiceCollection services)
     {
-        services.AddSingleton<VerticalCutter>();
-        services.AddSingleton<HorizontalCutter>();
-        services.AddSingleton<ICutter>(s => new BestCutter(
-                new ICutter[]
-                {
-                    s.GetRequiredService<VerticalCutter>(),
-                    s.GetRequiredService<HorizontalCutter>()
-                }));
+        services.AddCutter();
     }
 
     static async Task<IResult> PostSimpleBoxRequest(

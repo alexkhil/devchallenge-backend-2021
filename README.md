@@ -46,5 +46,4 @@ Both of these strategies are implemented, so we pick results from strategy with 
 
 - [ ] Simplify mapping on `SimpleBoxMappingProfile` caused by `System.Text.Json` which doesn't support polymorphic serialization
 - [ ] Improve assertion on `Endpoint_called_with_valid_request_respond_with_status_code_200_and_boxes` test by getting rid of string comparison
-- [ ] Improve `BestCutter` by running cut strategies comparison in parallel
 - [ ] Run tests in container to avoid installations of .Net runtime

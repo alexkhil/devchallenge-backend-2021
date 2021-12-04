@@ -17,9 +17,9 @@ public class Sheet
 
     public Result<Sheet> CanPlace(Box box)
     {
-        var canBePlacedHorizontaly = Width.Value >= box.TemplateWidth && Height.Value >= box.TemplateHeight;
+        var canBePlacedHorizontally = Width.Value >= box.TemplateWidth && Height.Value >= box.TemplateHeight;
         var canBePlacedVertically = Width.Value >= box.TemplateHeight && Height.Value >= box.TemplateWidth;
-        return SuccessIf(canBePlacedHorizontaly || canBePlacedVertically, this, Messages.InvalidSheet.TooSmall);
+        return SuccessIf(canBePlacedHorizontally || canBePlacedVertically, this, Messages.InvalidSheet.TooSmall);
     }
 
     public static Result<Sheet> Create(int width, int height)
