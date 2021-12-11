@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseHttpLogging();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseEndpointDefinitions();
